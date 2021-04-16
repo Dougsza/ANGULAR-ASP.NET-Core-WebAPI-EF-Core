@@ -1,0 +1,18 @@
+<app-titulo [title]="title"></app-titulo>
+<br>
+<table class="table">
+    <thead class="thread-light">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Sobrenome</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor ="let usuario of usuarios">
+        <th scope="row" >{{usuario.id}}</th>
+        <td>{{usuario.nome}}</td>
+        <td>{{usuario.sobrenome}}</td>        
+      </tr>     
+    </tbody>
+  </table>
