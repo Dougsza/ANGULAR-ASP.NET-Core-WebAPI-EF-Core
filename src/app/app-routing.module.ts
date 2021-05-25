@@ -5,6 +5,7 @@ import { FuncionariosComponent } from './funcionarios/funcionarios.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 
+//Pega todos componentes e envia pro app.component.html
 const routes: Routes = [
   {path:'', redirectTo: 'dashboard', pathMatch: 'full'}, 
   {path:'usuarios', component: UsuariosComponent},

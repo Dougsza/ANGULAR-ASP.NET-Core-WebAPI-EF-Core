@@ -1,20 +1,61 @@
-<div class="container">
-  <app-titulo [title]="title"></app-titulo>
-<br>
-<table class="table">
-    <thead class="thread-light">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Sobrenome</th>        
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor ="let usuario of usuarios">
-        <th scope="row" >{{usuario.id}}</th>
-        <td>{{usuario.nome}}</td>
-        <td>{{usuario.sobrenome}}</td>        
-      </tr>     
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-sm-5" *ngIf="usuariosSelected">
+    <div class="row">
+      <!--Título da pagina usuário-->
+      <div class="mr-auto">
+        <app-titulo [title]="'Usuario '+usuariosSelected.nome"></app-titulo>
+      </div>
+      <!--Botão para voltar pra lista de usuarios-->
+      <div class="mt-2">
+        <button class="btn btn-outline-danger" (click)="voltar()">
+          Fechar
+        </button>
+      </div>  
+    </div> 
+    <!--Formulario de preenchimento-->
+    <form [formGroup] = "usuarioForms" (submit) = "usuarioSubmit()">
+      <div class="form-group">
+        <label for="formGroupExampleInput" class="form-label">Nome</label>
+        <input type="text" formControlName = "nome" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2" class="form-label">Sobrenome</label>
+        <input type="text" formControlName = "sobrenome" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2" class="form-label">Telefone</label>
+        <input type="text" formControlName = "email" class="form-control">
+      </div>
+      <div class="form-group">
+        <hr>
+        <button class="btn btn-success" [disabled] ="!usuarioForms.valid">Salvar</button>
+      </div>
+    </form>
+  </div>
+  <!--Faz com que a aba se expanda caso não tenha nenhum usuario selecionado-->
+  <div [ngClass]="{'col-sm-7': usuariosSelected , 'col-sm-12': !usuariosSelected}">
+    <app-titulo [title]="title"></app-titulo>
+    <!--Tabela de usuarios com ID, NOME e SOBRENOME-->
+    <table class="table table-hover"style="cursor: pointer;">
+      <thead class="thread-light">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sobrenome</th>  
+          <th scope="col">E-mail</th>      
+        </tr>
+      </thead>
+      <tbody>
+        <!--Loop para mostrar todos os usuarios-->
+        <tr *ngFor ="let usuario of usuarios"(click)="usuariosSelect(usuario)">
+          <th scope="row" >{{usuario.id}}</th>
+          <td>{{usuario.nome}}</td>
+          <td>{{usuario.sobrenome}}</td> 
+          <td>{{usuario.email}}</td>       
+        </tr>     
+      </tbody>
+    </table>
+  </div>
 </div>
+
+
